@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node-dev app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node-dev": "^7.1.0"
+  
+  },
+  "dependencies": {
+    "dotenv": "^14.2.0",
+    "expres": "^0.0.5",
+    "mongoose": "^6.1.7"
+  }
+}
