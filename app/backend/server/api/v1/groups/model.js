@@ -1,39 +1,39 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
 const fields = {
   nombre: {
     type: String,
     required: true,
-    trim: true,
-  },
-};
+    trim: true
+  }
+}
 
 const references = {
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'user',
-    required: true,
-  },
-};
+    required: true
+  }
+}
 
 const group = new Schema(Object.assign(fields, references), {
   timestamps: true,
   toJSON: {
-    virtuals: true,
-  },
-});
+    virtuals: true
+  }
+})
 
 const virtuals = {
   tasks: {
     ref: 'task',
     localField: '_id',
-    foreignField: 'groupId',
-  },
-};
-group.virtual('tasks', virtuals.tasks);
+    foreignField: 'groupId'
+  }
+}
+group.virtual('tasks', virtuals.tasks)
 
 module.exports = {
-  Model: mongoose.model('group', group), fields, references, virtuals,
-} 
+  Model: mongoose.model('group', group), fields, references, virtuals
+}

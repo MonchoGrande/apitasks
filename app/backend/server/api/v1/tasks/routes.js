@@ -1,9 +1,9 @@
 const router = require('express').Router({
-  mergeParams: true,
-});
+  mergeParams: true
+})
 
-const controller = require('./controller');
-const { auth, owner,verifyAdmin } = require('../auth');
+const controller = require('./controller')
+const { auth, owner, verifyAdmin } = require('../auth')
 
 /*
  /api/tasks/ POST - crear tarea --funciona
@@ -13,19 +13,17 @@ const { auth, owner,verifyAdmin } = require('../auth');
  /api/tasks/:id- DELETE - Eliminar tarea po Id --funciona
  */
 
-router.param('id', controller.id);
- 
+router.param('id', controller.id)
+
 router
   .route('/')
-  .post(auth,controller.parentId, controller.create)
-  .get(auth,controller.parentId, controller.all);
-
-
+  .post(auth, controller.parentId, controller.create)
+  .get(auth, controller.parentId, controller.all)
 
 router
   .route('/:id')
-  .get(auth,owner,controller.read)
-  .put(auth,owner,controller.update)
-  .delete(auth,verifyAdmin,controller.deleted);
+  .get(auth, owner, controller.read)
+  .put(auth, owner, controller.update)
+  .delete(auth, verifyAdmin, controller.deleted)
 
-module.exports = router;
+module.exports = router

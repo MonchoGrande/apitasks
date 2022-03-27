@@ -1,9 +1,9 @@
 const router = require('express').Router({
-  mergeParams: true,
-});
+  mergeParams: true
+})
 
-const controller = require('./controller');
-const {auth,verifyAdmin}=require('../auth')
+const controller = require('./controller')
+const { auth, verifyAdmin } = require('../auth')
 
 /*
  /api/groups/ POST - Crear grupo --funciona
@@ -13,14 +13,14 @@ const {auth,verifyAdmin}=require('../auth')
  /api/groups/:id- DELETE - Eliminar un grupo --funciona
  */
 
-router.param('id', controller.id);
+router.param('id', controller.id)
 
-router.route('/').post(auth,verifyAdmin,controller.create).get(auth,verifyAdmin,controller.all);
+router.route('/').post(auth, verifyAdmin, controller.create).get(auth, verifyAdmin, controller.all)
 
 router
   .route('/:id')
-  .get(auth,controller.read)
-  .put(auth,verifyAdmin,controller.update)
-  .delete(auth,verifyAdmin,controller.deleted);
+  .get(auth, controller.read)
+  .put(auth, verifyAdmin, controller.update)
+  .delete(auth, verifyAdmin, controller.deleted)
 
-module.exports = router;
+module.exports = router

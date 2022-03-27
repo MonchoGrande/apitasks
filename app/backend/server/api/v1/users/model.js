@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const { hash, compare } = require('bcryptjs');
+const { hash, compare } = require('bcryptjs')
 
-const { Schema } = mongoose;
+const { Schema } = mongoose
 
 const fields = {
   nombre: { type: String, required: true, trim: true },
@@ -12,58 +12,58 @@ const fields = {
     required: true,
     unique: true,
     trim: true,
-    lowercase: true,
+    lowercase: true
   },
   password: { type: String, required: true, trim: true, min: 6 },
-  role: { type: String, required: true, trim: true,default:'empleado' },
-};
+  role: { type: String, required: true, trim: true, default: 'empleado' }
+}
 
 const user = new Schema(fields, {
   timestamps: true,
   toJSON: {
-    virtuals: true,
+    virtuals: true
   },
   toObject: {
-    virtuals: true,
-  },
-});
+    virtuals: true
+  }
+})
 
 user
   .virtual('name')
-  .get(function getName() {
-    return `${this.nombre}${this.apellidos}`;
+  .get(function getName () {
+    return `${this.nombre}${this.apellidos}`
   })
-  .set(function setName(name) {
-    const [nombre = '', apellidos = ''] = name.split(' ');
-    this.nombre = nombre;
-    this.apellidos = apellidos;
-  });
+  .set(function setName (name) {
+    const [nombre = '', apellidos = ''] = name.split(' ')
+    this.nombre = nombre
+    this.apellidos = apellidos
+  })
 
-const hiddenFields = ['password'];
+const hiddenFields = ['password']
 
-user.methods.toJSON = function toJSON() {
-  const doc = this.toObject();
+user.methods.toJSON = function toJSON () {
+  const doc = this.toObject()
   hiddenFields.forEach((field) => {
     if (Object.hasOwnProperty.call(doc, field)) {
-      delete doc[field];
+      delete doc[field]
     }
-  });
+  })
 
-  return doc;
-};
+  return doc
+}
 
-user.pre('save', async function save(next) {
+user.pre('save', async function save (next) {
   if (this.isNew || this.isModified('password')) {
-    this.password = await hash(this.password, 10);
+    this.password = await hash(this.password, 10)
   }
-  next();
-});
+  next()
+})
 
-user.methods.verifyPassword = function verifyPassword(password) {
-  return compare(password, this.password);
-};
+user.methods.verifyPassword = function verifyPassword (password) {
+  return compare(password, this.password)
+}
 
 module.exports = {
   Model: mongoose.model('user', user),
-  fields,
-};
+  fields
+}
