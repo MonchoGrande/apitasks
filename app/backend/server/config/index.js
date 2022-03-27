@@ -11,6 +11,32 @@ const config = {
     username: process.env.USERNAME,
     password: process.env.PASSWORD,
   },
+  pagination: {
+    limit: 10,
+    skip: 0,
+    page: 1,
+  },
+  sort: {
+    sortBy: {
+      default: 'createdAt',
+      fields: ['createdAt', 'updatedAt'],
+    },
+    direction: {
+      default: 'desc',
+      options: ['asc', 'asc'],
+    },
+  },
+  populate: {
+    virtuals: {
+      limit: 20,
+      sort: 'createAt',
+      direction: 'asc',
+    },
+  },
+  token: {
+    secret: process.env.TOKEN_SECRET,
+    expires: process.env.TOKEN_EXPIRES,
+  }
 };
 
 module.exports = config;

@@ -9,9 +9,7 @@ database.connect(config.database, {});
 
 const server = http.createServer(app);
 
+
 server.listen(port, () => {
   console.log(`server on running on port: ${port}`);
 });
-
-
-
