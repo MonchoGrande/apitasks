@@ -3,10 +3,10 @@ const logger = require('./config/logger');
 const api = require('./api/v1')
 const morgan = require('morgan');
 
-//Inicio app
+//Init app
 const app = express();
 
-// Configurar cabeceras y cors
+//Configure headers and cors
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
@@ -19,7 +19,6 @@ app.use((req, res, next) => {
 });
 
 //Middlewares
-
 app.use(logger.requests);
 
 app.use(
